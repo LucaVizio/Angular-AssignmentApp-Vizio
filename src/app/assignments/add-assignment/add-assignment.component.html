@@ -1,0 +1,42 @@
+<!-- Page d'ajout d'un devoir -->
+<div class="add-container">
+    <mat-card appearance="outlined" class="add-card">
+        <mat-card-header>
+            <mat-card-title>
+                <mat-icon>add_circle</mat-icon>
+                Ajout d'un devoir
+            </mat-card-title>
+            <mat-card-subtitle>Remplissez les informations du nouveau devoir</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+            <!-- Formulaire d'ajout d'un devoir -->
+            <form ngForm #assignmentForm (submit)="onAjouterDevoir($event); assignmentForm.reset()" class="add-form">
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Nom du devoir</mat-label>
+                    <input matInput [(ngModel)]="nomDevoir" name="nomDevoir" placeholder="Nom du devoir" required>
+                </mat-form-field>
+
+                <!-- Champ de sélection de la date -->
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Date de rendu</mat-label>
+                    <input matInput [matDatepicker]="picker" placeholder="Date de rendu" [(ngModel)]="dateDeRendu" name="date" required>
+                    <mat-hint>MM/JJ/AAAA</mat-hint>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+
+                <div class="form-actions">
+                    <button mat-stroked-button type="button" routerLink="/home">
+                        <mat-icon>arrow_back</mat-icon>
+                        Retour
+                    </button>
+                    <button mat-raised-button color="primary" type="submit" [disabled]="!nomDevoir || !dateDeRendu">
+                        <mat-icon>add</mat-icon>
+                        Ajouter le devoir
+                    </button>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

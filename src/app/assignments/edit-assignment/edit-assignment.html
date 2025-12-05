@@ -1,0 +1,90 @@
+<!-- Page de modification des devoirs -->
+<div class="edit-container">
+    <mat-card appearance="outlined" class="edit-card">
+        
+        <!-- Mode Liste -->
+        @if (mode === 'list') {
+            <mat-card-header>
+                <mat-card-title>
+                    <mat-icon>edit</mat-icon>
+                    Modification de devoirs
+                </mat-card-title>
+                <mat-card-subtitle>Sélectionnez un devoir à modifier</mat-card-subtitle>
+            </mat-card-header>
+
+            <mat-card-content>
+                <!-- Message si aucun devoir -->
+                @if (assignments.length === 0) {
+                    <p class="no-assignments">Aucun devoir à modifier</p>
+                } @else {
+                    <!-- Liste des devoirs -->
+                    <mat-list>
+                        @for (assignment of assignments; track assignment._id) {
+                            <mat-list-item class="assignment-item">
+                                <div class="assignment-info">
+                                    <span class="assignment-name">{{ assignment.nom }}</span>
+                                    <span class="assignment-date">{{ assignment.dateDeRendu | date: 'dd/MM/yyyy' }}</span>
+                                    <span class="assignment-status" [class.rendu]="assignment.rendu">
+                                        {{ assignment.rendu ? 'Rendu' : 'Non rendu' }}
+                                    </span>
+                                </div>
+                                <button mat-icon-button color="primary" (click)="onEdit(assignment)" matTooltip="Modifier">
+                                    <mat-icon>edit</mat-icon>
+                                </button>
+                            </mat-list-item>
+                            <mat-divider></mat-divider>
+                        }
+                    </mat-list>
+
+                    <!-- Pagination -->
+                    <mat-paginator
+                        [length]="totalDocs"
+                        [pageSize]="limit"
+                        [pageSizeOptions]="[5, 10, 25, 50]"
+                        (page)="onPageChange($event)"
+                        showFirstLastButtons>
+                    </mat-paginator>
+                }
+            </mat-card-content>
+        }
+
+        <!-- Mode Edition -->
+        @if (mode === 'edit' && assignment) {
+            <mat-card-header>
+                <mat-card-title>
+                    <mat-icon>edit</mat-icon>
+                    Édition du devoir
+                </mat-card-title>
+                <mat-card-subtitle>{{ assignment.nom }}</mat-card-subtitle>
+            </mat-card-header>
+
+            <mat-card-content>
+                <!-- Formulaire d'édition du devoir -->
+                <form ngForm class="edit-form" #formupdate (submit)="onSaveAssignment(); formupdate.reset();">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Nom du devoir</mat-label>
+                        <input matInput placeholder="Nom du devoir" [(ngModel)]="nomAssignment" name="assignment-name">
+                    </mat-form-field>
+                    
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Date de rendu</mat-label>
+                        <input matInput [matDatepicker]="picker" placeholder="Date de rendu" [(ngModel)]="dateDeRendu" name="assignment-date">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+
+                    <div class="form-actions">
+                        <button mat-stroked-button type="button" (click)="onCancel()">
+                            <mat-icon>arrow_back</mat-icon>
+                            Retour
+                        </button>
+                        <button mat-raised-button color="primary" type="submit" [disabled]="!nomAssignment || !dateDeRendu">
+                            <mat-icon>save</mat-icon>
+                            Sauvegarder
+                        </button>
+                    </div>
+                </form>
+            </mat-card-content>
+        }
+    </mat-card>
+</div>

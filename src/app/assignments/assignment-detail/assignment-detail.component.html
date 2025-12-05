@@ -1,0 +1,94 @@
+<!-- Page de détail d'un devoir -->
+<div class="detail-container">
+    @if (devoirTransmis) {
+        <mat-card appearance="outlined" class="detail-card">
+            <mat-card-header>
+                <mat-card-title>
+                    <mat-icon>description</mat-icon>
+                    Détail du devoir
+                </mat-card-title>
+                <mat-card-subtitle>Informations complètes sur le devoir</mat-card-subtitle>
+            </mat-card-header>
+
+            <mat-card-content>
+                <!-- Informations du devoir -->
+                <div class="detail-info">
+                    <div class="info-row">
+                        <div class="info-label">
+                            <mat-icon>assignment</mat-icon>
+                            <span>Nom du devoir</span>
+                        </div>
+                        <div class="info-value">{{ devoirTransmis.nom }}</div>
+                    </div>
+
+                    <mat-divider></mat-divider>
+
+                    <div class="info-row">
+                        <div class="info-label">
+                            <mat-icon>calendar_today</mat-icon>
+                            <span>Date de rendu</span>
+                        </div>
+                        <div class="info-value">{{ devoirTransmis.dateDeRendu | date: 'dd/MM/yyyy' }}</div>
+                    </div>
+
+                    <mat-divider></mat-divider>
+
+                    <div class="info-row">
+                        <div class="info-label">
+                            <mat-icon>check_circle</mat-icon>
+                            <span>Statut</span>
+                        </div>
+                        <div class="info-value">
+                            <mat-chip-set>
+                                @if (devoirTransmis.rendu) {
+                                    <mat-chip class="chip-rendu" highlighted>
+                                        <mat-icon>done</mat-icon>
+                                        Rendu
+                                    </mat-chip>
+                                } @else {
+                                    <mat-chip class="chip-non-rendu">
+                                        <mat-icon>pending</mat-icon>
+                                        Non rendu
+                                    </mat-chip>
+                                }
+                            </mat-chip-set>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Actions sur le devoir -->
+                @if (!devoirTransmis.rendu) {
+                    <div class="actions-section">
+                        <mat-divider></mat-divider>
+                        <div class="action-row">
+                            <mat-checkbox (click)="OnDevoirRendu()" color="primary">
+                                Marquer comme rendu
+                            </mat-checkbox>
+                        </div>
+                    </div>
+                }
+            </mat-card-content>
+
+            <mat-card-actions class="card-actions">
+                <button mat-stroked-button routerLink="/home">
+                    <mat-icon>arrow_back</mat-icon>
+                    Retour à la liste
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    } @else {
+        <!-- Message si aucun devoir sélectionné -->
+        <mat-card appearance="outlined" class="no-assignment-card">
+            <mat-card-content>
+                <div class="no-assignment">
+                    <mat-icon>info</mat-icon>
+                    <p>Aucun devoir sélectionné</p>
+                    <button mat-stroked-button routerLink="/home">
+                        <mat-icon>arrow_back</mat-icon>
+                        Retour à la liste
+                    </button>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    }
+</div>

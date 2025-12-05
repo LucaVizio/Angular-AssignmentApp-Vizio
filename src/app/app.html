@@ -1,0 +1,113 @@
+<!-- Barre d'outils en haut de la page -->
+<mat-toolbar color="primary">
+  <!-- Ensemble du contenu de la barre d'outils -->
+  <mat-toolbar-row>
+
+    <!-- Bouton : MENU -->
+    <button mat-icon-button (click)="opened = !opened" class="icon-button">
+      <mat-icon style="color: white;">menu</mat-icon>
+    </button>
+
+    <!-- Titre de l'application -->
+    <span class="title" routerLink="/home">{{ title() }}</span>
+
+    <!-- Espaceur -->
+    <span class="espacement_horizontale"></span>
+
+    <!-- Bouton : ACCUEIL -->
+    <button mat-icon-button class="icon-button" routerLink="/home">
+      <mat-icon style="color: white;">home</mat-icon>
+    </button>
+
+    <!-- Bouton : COMPTE UTILISATEUR / CONNEXION -->
+    @if (!isLogged()) {
+      <button mat-icon-button class="icon-button" (click)="goToLogin()" matTooltip="Se connecter">
+        <mat-icon style="color: white;">person</mat-icon>
+      </button>
+    } @else {
+      <button mat-icon-button class="icon-button" [matMenuTriggerFor]="userMenu" matTooltip="Mon compte">
+        <mat-icon style="color: white;">account_circle</mat-icon>
+      </button>
+      <mat-menu #userMenu="matMenu">
+        <div class="user-menu-header">
+          <strong>{{ getUserRole() }}</strong>
+        </div>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          <span>Se déconnecter</span>
+        </button>
+      </mat-menu>
+    }
+
+  </mat-toolbar-row>
+
+</mat-toolbar>
+
+<!-- Barre latérale à gauche de la page -->
+<mat-sidenav-container>
+
+  <!-- Menu latéral -->
+  <mat-sidenav [(opened)]="opened" mode="side" class="sidenav">
+
+    <!-- En-tête du menu -->
+    <div class="sidenav-header">
+      <mat-icon class="header-icon">school</mat-icon>
+      <span class="header-title">Menu</span>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <!-- Section Navigation -->
+    <div class="nav-section">
+      <div class="section-title">Navigation</div>
+      <mat-nav-list>
+        <a mat-list-item routerLink="/home" routerLinkActive="active-link" class="nav-item">
+          <mat-icon matListItemIcon>list_alt</mat-icon>
+          <span matListItemTitle>Liste des devoirs</span>
+        </a>
+      </mat-nav-list>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <!-- Section Gestion -->
+    <div class="nav-section">
+      <div class="section-title">Gestion des devoirs</div>
+      <mat-nav-list>
+        <a mat-list-item (click)="onAddClick()" routerLinkActive="active-link" class="nav-item" [class.disabled]="!isLogged()">
+          <mat-icon matListItemIcon class="icon-add">add_circle</mat-icon>
+          <span matListItemTitle>Ajouter un devoir</span>
+        </a>
+        <a mat-list-item (click)="onEditClick()" routerLinkActive="active-link" class="nav-item" [class.disabled]="!isAdmin()">
+          <mat-icon matListItemIcon class="icon-edit">edit</mat-icon>
+          <span matListItemTitle>Modifier un devoir</span>
+        </a>
+        <a mat-list-item (click)="onDeleteClick()" routerLinkActive="active-link" class="nav-item" [class.disabled]="!isAdmin()">
+          <mat-icon matListItemIcon class="icon-delete">delete</mat-icon>
+          <span matListItemTitle>Supprimer un devoir</span>
+        </a>
+      </mat-nav-list>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <!-- Section Administration -->
+    <div class="nav-section">
+      <div class="section-title">Administration</div>
+      <mat-nav-list>
+        <a mat-list-item (click)="onPeuplerBDClick()" class="nav-item" [class.disabled]="isPeuplerBDDisabled()">
+          <mat-icon matListItemIcon class="icon-data">dataset</mat-icon>
+          <span matListItemTitle>Générer des données test</span>
+        </a>
+      </mat-nav-list>
+    </div>
+
+  </mat-sidenav>
+    
+  <!-- Contenu  -->
+  <mat-sidenav-content>
+    <!-- Contenu global -->
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

@@ -1,0 +1,59 @@
+<!-- Page de liste des devoirs -->
+<div class="list-container">
+    <mat-card appearance="outlined" class="list-card">
+        <mat-card-header>
+            <mat-card-title>
+                <mat-icon>assignment</mat-icon>
+                Liste des devoirs
+            </mat-card-title>
+            <mat-card-subtitle>{{ totalDocs || 0 }} devoir(s) au total</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+            <!-- Message si aucun devoir -->
+            @if (!assignments || assignments.length === 0) {
+                <p class="no-assignments">Aucun devoir disponible</p>
+            } @else {
+                <!-- Liste des devoirs -->
+                <div class="assignments-grid">
+                    @for (assignment of assignments; track assignment.id) {
+                        <mat-card class="assignment-card" [routerLink]="'/assignment/' + assignment.id">
+                            <mat-card-header>
+                                <mat-card-title class="assignment-title">{{ assignment.nom }}</mat-card-title>
+                                <mat-card-subtitle>
+                                    <mat-icon class="date-icon">calendar_today</mat-icon>
+                                    {{ assignment.dateDeRendu | date: 'dd/MM/yyyy' }}
+                                </mat-card-subtitle>
+                            </mat-card-header>
+                            <mat-card-content>
+                                <mat-chip-set>
+                                    @if (assignment.rendu) {
+                                        <mat-chip class="chip-rendu" highlighted>
+                                            <mat-icon>check_circle</mat-icon>
+                                            Rendu
+                                        </mat-chip>
+                                    } @else {
+                                        <mat-chip class="chip-non-rendu">
+                                            <mat-icon>pending</mat-icon>
+                                            Non rendu
+                                        </mat-chip>
+                                    }
+                                </mat-chip-set>
+                            </mat-card-content>
+                        </mat-card>
+                    }
+                </div>
+
+                <!-- Pagination -->
+                <mat-paginator 
+                    [length]="totalDocs"
+                    [pageSize]="limit"
+                    [pageIndex]="page - 1"
+                    [pageSizeOptions]="[5, 10, 25, 50, 100]"
+                    (page)="onPageChange($event)"
+                    showFirstLastButtons>
+                </mat-paginator>
+            }
+        </mat-card-content>
+    </mat-card>
+</div>

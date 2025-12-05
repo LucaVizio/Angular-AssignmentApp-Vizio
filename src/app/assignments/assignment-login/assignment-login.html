@@ -1,0 +1,53 @@
+<!-- Page de connexion -->
+<div class="login-container">
+    <mat-card appearance="outlined" class="login-card">
+        <mat-card-header>
+            <mat-card-title>
+                <mat-icon>login</mat-icon>
+                Connexion
+            </mat-card-title>
+            <mat-card-subtitle>Connectez-vous pour accéder à l'application</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+            <!-- Formulaire de connexion -->
+            <form #loginForm="ngForm" (ngSubmit)="onSubmit()" class="login-form">
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Login</mat-label>
+                    <mat-icon matPrefix>person</mat-icon>
+                    <input matInput [(ngModel)]="login" name="login" required placeholder="Entrez votre login">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Mot de passe</mat-label>
+                    <mat-icon matPrefix>lock</mat-icon>
+                    <input matInput type="password" [(ngModel)]="password" name="password" required placeholder="Entrez votre mot de passe">
+                </mat-form-field>
+
+                @if (errorMessage) {
+                    <div class="error-message">
+                        <mat-icon>error</mat-icon>
+                        <span>{{ errorMessage }}</span>
+                    </div>
+                }
+
+                <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid" class="login-button">
+                    <mat-icon>login</mat-icon>
+                    Se connecter
+                </button>
+            </form>
+            
+            <!-- Informations sur les comptes de test -->
+            <div class="credentials-info">
+                <div class="credentials-header">
+                    <mat-icon>info</mat-icon>
+                    <strong>Comptes de test</strong>
+                </div>
+                <div class="credentials-list">
+                    <p><mat-icon class="role-icon admin">admin_panel_settings</mat-icon> Admin : login=admin, password=admin</p>
+                    <p><mat-icon class="role-icon user">person</mat-icon> User : login=user, password=user</p>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

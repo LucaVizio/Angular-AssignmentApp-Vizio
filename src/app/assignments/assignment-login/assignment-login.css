@@ -1,0 +1,116 @@
+/* Style du conteneur de connexion */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 20px;
+}
+
+/* Style de la carte de connexion */
+.login-card {
+    max-width: 450px;
+    width: 100%;
+}
+
+/* Style du header de la carte */
+mat-card-header {
+    margin-bottom: 20px;
+}
+
+/* Style du titre dans le header */
+mat-card-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #1976d2;
+}
+
+/* Style du formulaire de connexion */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px 0;
+}
+
+/* Style pour les champs en pleine largeur */
+.full-width {
+    width: 100%;
+}
+
+/* Style du message d'erreur */
+.error-message {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #c62828;
+    background-color: #ffcdd2;
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* Style de l'icône dans le message d'erreur */
+.error-message mat-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+}
+
+/* Style du bouton de connexion */
+.login-button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 8px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* Style des informations de connexion */
+.credentials-info {
+    margin-top: 24px;
+    padding: 15px;
+    background-color: #e3f2fd;
+    border-radius: 8px;
+    border-left: 4px solid #1976d2;
+}
+
+/* Style du header des informations de connexion */
+.credentials-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    color: #1976d2;
+}
+
+/* Style des rôles et identifiants */
+.credentials-list p {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 8px 0;
+    font-size: 13px;
+    color: #555;
+}
+
+/* Style des icônes de rôle */
+.role-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}
+
+/* Style des icônes de rôle admin */
+.role-icon.admin {
+    color: #d32f2f;
+}
+
+/* Style des icônes de rôle utilisateur */
+.role-icon.user {
+    color: #388e3c;
+}

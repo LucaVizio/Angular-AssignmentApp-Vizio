@@ -1,0 +1,53 @@
+/* Style du conteneur d'ajout */
+.add-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Style de la carte d'ajout */
+.add-card {
+    width: 100%;
+    max-width: 600px;
+}
+
+/* Style du header de la carte */
+mat-card-header {
+    margin-bottom: 20px;
+}
+
+/* Style du titre dans le header */
+mat-card-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #388e3c;
+}
+
+/* Style du formulaire d'ajout */
+.add-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px 0;
+}
+
+/* Style pour les champs en pleine largeur */
+.full-width {
+    width: 100%;
+}
+
+/* Style des actions du formulaire */
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+/* Style des boutons dans les actions du formulaire */
+.form-actions button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}

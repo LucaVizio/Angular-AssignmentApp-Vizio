@@ -1,0 +1,107 @@
+/* Styles pour le composant d'édition des assignments */
+.edit-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Style de la card principale */
+.edit-card {
+    width: 100%;
+    max-width: 800px;
+}
+
+/* Style du header de la card */
+mat-card-header {
+    margin-bottom: 20px;
+}
+
+/* Style du titre dans le header */
+mat-card-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #1976d2;
+}
+
+/* Style du message lorsqu'il n'y a pas d'assignments */
+.no-assignments {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+    font-style: italic;
+}
+
+/* Style des items d'assignments */
+.assignment-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    height: auto !important;
+}
+
+/* Style des informations de l'assignment */
+.assignment-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1;
+}
+
+/* Style du nom de l'assignment */
+.assignment-name {
+    font-weight: 500;
+    font-size: 16px;
+}
+
+/* Style de la date de l'assignment */
+.assignment-date {
+    font-size: 12px;
+    color: #666;
+}
+
+/* Style du statut de l'assignment */
+.assignment-status {
+    font-size: 12px;
+    color: #d32f2f;
+    font-weight: 500;
+}
+
+/* Style du statut rendu */
+.assignment-status.rendu {
+    color: #388e3c;
+}
+
+/* Style du paginator */
+mat-paginator {
+    margin-top: 20px;
+}
+
+/* Style du formulaire d'édition */
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px 0;
+}
+
+/* Style pour les champs en pleine largeur */
+.full-width {
+    width: 100%;
+}
+
+/* Style des actions du formulaire */
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+/* Style des boutons dans les actions du formulaire */
+.form-actions button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}

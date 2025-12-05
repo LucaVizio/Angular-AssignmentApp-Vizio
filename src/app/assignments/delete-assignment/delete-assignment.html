@@ -1,0 +1,47 @@
+<!-- Page de suppression des devoirs -->
+<div class="delete-container">
+    <mat-card appearance="outlined" class="delete-card">
+        <mat-card-header>
+            <mat-card-title>
+                <mat-icon>delete</mat-icon>
+                Suppression de devoirs
+            </mat-card-title>
+            <mat-card-subtitle>Sélectionnez un devoir à supprimer</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+            <!-- Message si aucun devoir -->
+            @if (assignments.length === 0) {
+                <p class="no-assignments">Aucun devoir à supprimer</p>
+            } @else {
+                <!-- Liste des devoirs -->
+                <mat-list>
+                    @for (assignment of assignments; track assignment._id) {
+                        <mat-list-item class="assignment-item">
+                            <div class="assignment-info">
+                                <span class="assignment-name">{{ assignment.nom }}</span>
+                                <span class="assignment-date">{{ assignment.dateDeRendu | date: 'dd/MM/yyyy' }}</span>
+                                <span class="assignment-status" [class.rendu]="assignment.rendu">
+                                    {{ assignment.rendu ? 'Rendu' : 'Non rendu' }}
+                                </span>
+                            </div>
+                            <button mat-icon-button color="warn" (click)="onDelete(assignment)" matTooltip="Supprimer">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-divider></mat-divider>
+                    }
+                </mat-list>
+
+                <!-- Pagination -->
+                <mat-paginator
+                    [length]="totalDocs"
+                    [pageSize]="limit"
+                    [pageSizeOptions]="[5, 10, 25, 50]"
+                    (page)="onPageChange($event)"
+                    showFirstLastButtons>
+                </mat-paginator>
+            }
+        </mat-card-content>
+    </mat-card>
+</div>
